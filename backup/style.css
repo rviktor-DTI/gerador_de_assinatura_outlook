@@ -211,7 +211,7 @@ input[type="text"]:focus {
     font-weight: 500;
     user-select: none;
     border-color: var(--border-color);
-    border-style: solid;
+    border-style: none;
 }
 
 .input-prefix {
