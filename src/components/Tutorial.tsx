@@ -71,24 +71,54 @@ export const Tutorial: React.FC<{ visible: boolean }> = ({ visible }) => {
         <p>Siga o passo-a-passo detalhado abaixo correspondente à sua versão do Outlook.</p>
       </div>
 
-      <div className="tutorial-card">
+      <div className="tutorial-container">
         {/* Abas de Navegação */}
         <div className="tutorial-tabs">
-          <button
-            type="button"
-            className={`tab-btn ${activeTab === 'new' ? 'active' : ''}`}
-            onClick={() => setActiveTab('new')}
+        <button
+          type="button"
+          className={`tab-btn ${activeTab === 'new' ? 'active' : ''}`}
+          onClick={() => setActiveTab('new')}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            Outlook (Novo)
-          </button>
-          <button
-            type="button"
-            className={`tab-btn ${activeTab === 'classic' ? 'active' : ''}`}
-            onClick={() => setActiveTab('classic')}
+            <rect width="20" height="16" x="2" y="4" rx="2" />
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+          </svg>
+          Outlook (Novo)
+        </button>
+        <button
+          type="button"
+          className={`tab-btn ${activeTab === 'classic' ? 'active' : ''}`}
+          onClick={() => setActiveTab('classic')}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            Outlook Clássico (Antigo)
-          </button>
-        </div>
+            <rect width="20" height="16" x="2" y="4" rx="2" />
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+          </svg>
+          Outlook Clássico (Antigo)
+        </button>
+      </div>
+
+      <div className="tutorial-card">
 
         {/* Outlook Novo */}
         {activeTab === 'new' && (
@@ -203,6 +233,7 @@ export const Tutorial: React.FC<{ visible: boolean }> = ({ visible }) => {
             />
           </div>
         )}
+      </div>
       </div>
     </section>
   );

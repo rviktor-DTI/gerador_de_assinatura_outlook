@@ -513,46 +513,101 @@ select {
     overflow: visible;
 }
 
+.tutorial-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .tutorial-card {
     background: var(--card-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-lg); /* Cantos completamente arredondados */
     padding: 32px;
     box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.8); /* Borda branca translúcida original */
     display: flex;
     flex-direction: column;
     gap: 24px;
+    margin-top: -1px; /* Garante fusão perfeita com a aba ativa */
+    position: relative;
+    z-index: 2;
 }
 
 .tutorial-tabs {
     display: flex;
-    gap: 16px;
-    border-bottom: 2px solid #e2e8f0;
-    margin-bottom: 8px;
+    background: transparent;
+    padding: 0 32px;
+    margin-bottom: -1px; /* Sobrepõe exatamente a borda superior do card */
+    gap: 6px;
+    align-items: flex-end;
+    height: 48px;
+    box-sizing: border-box;
+    position: relative;
+    /* z-index removido para que as abas inativas fiquem atrás do card */
 }
 
 .tab-btn {
-    padding: 12px 24px;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text-secondary);
-    background: none;
+    position: relative;
+    padding: 8px 24px;
+    height: 38px;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #ffffff; /* Texto branco */
+    background: var(--brand-primary); /* Inativa é azul FAPEMIG */
     border: none;
-    border-bottom: 3px solid transparent;
-    margin-bottom: -2px;
+    border-radius: 12px 12px 0 0;
     cursor: pointer;
-    transition: var(--transition);
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    z-index: 1;
+    margin-bottom: -1px; /* Sobrepõe a borda superior do contêiner */
 }
 
 .tab-btn:hover {
-    color: var(--brand-primary);
+    color: #ffffff;
+    background: #2a4978; /* Azul ligeiramente mais claro no hover */
 }
 
 .tab-btn.active {
-    color: var(--brand-primary);
-    border-bottom-color: var(--brand-primary);
+    color: var(--brand-primary); /* Texto azul para aba ativa branca */
+    background: #ffffff; /* Ativa é branca, incorporando o container */
+    z-index: 4; /* Fica acima da linha azul e do card */
+}
+
+.tab-btn svg {
+    transition: transform 0.2s ease;
+    stroke: #ffffff; /* Ícone branco para aba inativa azul */
+}
+
+.tab-btn.active svg {
+    stroke: var(--brand-primary); /* Ícone azul para aba ativa branca */
+}
+
+/* Curvas suaves estilo pasta/Chrome (Anti-aliasing de 1px contra pixelização) */
+.tab-btn.active::before,
+.tab-btn.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+}
+
+.tab-btn.active::before {
+    left: -12px;
+    /* Transição suave de 11px a 12px elimina o serrilhado no navegador */
+    background: radial-gradient(circle at 0 0, transparent 11px, #ffffff 12px);
+}
+
+.tab-btn.active::after {
+    right: -12px;
+    /* Transição suave de 11px a 12px elimina o serrilhado no navegador */
+    background: radial-gradient(circle at 100% 0, transparent 11px, #ffffff 12px);
 }
 
 .tutorial-content {
@@ -768,5 +823,47 @@ kbd {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@media (max-width: 640px) {
+    .tutorial-card {
+        padding: 20px;
+    }
+    .tutorial-tabs {
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 520px) {
+    .tutorial-tabs {
+        padding: 0 12px;
+        height: 40px;
+        gap: 2px;
+    }
+    .tab-btn {
+        padding: 6px 12px;
+        font-size: 12.5px;
+        height: 32px;
+        gap: 6px;
+        border-radius: 8px 8px 0 0;
+    }
+    .tab-btn svg {
+        width: 14px;
+        height: 14px;
+    }
+    .tab-btn.active::before {
+        width: 8px;
+        height: 8px;
+        left: -8px;
+        /* Transição suave de 7px a 8px contra serrilhado no mobile */
+        background: radial-gradient(circle at 0 0, transparent 7px, #ffffff 8px);
+    }
+    .tab-btn.active::after {
+        width: 8px;
+        height: 8px;
+        right: -8px;
+        /* Transição suave de 7px a 8px contra serrilhado no mobile */
+        background: radial-gradient(circle at 100% 0, transparent 7px, #ffffff 8px);
     }
 }
